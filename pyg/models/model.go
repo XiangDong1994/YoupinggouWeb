@@ -7,7 +7,7 @@ import (
 
 type User struct {
 	Id int
-	Name string `orm:"size(40)"`
+	Name string `orm:"size(40);unique"`
 	Pwd string `orm:"size(40)"`
 	Phone string `orm:"size(11)"`
 	Email string `orm:"null"`
