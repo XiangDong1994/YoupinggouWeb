@@ -13,4 +13,10 @@ func init() {
     beego.Router("/sendMsg",&controllers.UserController{},"post:HandleSendMsg")
     //邮箱激活
     beego.Router("/register-email",&controllers.UserController{},"get:ShowEmail;post:HandleEmail")
+    //激活用户
+    beego.Router("/active",&controllers.UserController{},"get:Active")
+    //登录实现
+    beego.Router("/login",&controllers.UserController{},"get:ShowLogin;post:HandleLogin")
+    //首页展示
+    beego.Router("/article/index",&controllers.UserController{},"get:ShoeIndex;post:ShowIndex")
 }
