@@ -21,7 +21,9 @@ type Address struct {
 	Addr string `orm:"size(100)"`
 	PostCode string
 	Phone string `orm:"size(11)"`
+	IsDefault bool `orm:"default(false)"` //默认地址
 	User *User `orm:"rel(fk)"`
+
 }
 
 func init(){
