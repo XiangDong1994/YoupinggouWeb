@@ -114,10 +114,10 @@
 											<h3><a href="">{{.t1.CateName}}</a></h3>
 											<div class="item-list clearfix">
 												<div class="subitem">
-													{{range .t2}}
+													{{range .t3}}
 													<dl class="fore1">
-														<dt><a href="">{{.CateName}}</a></dt>
-														<dd><em><a href="">免费</a></em><em><a href="">小说</a></em><em><a href="">励志与成功</a></em><em><a href="">婚恋/两性</a></em><em><a href="">文学</a></em><em><a href="">经管</a></em><em><a href="">畅读VIP</a></em></dd>
+														<dt><a href="">{{.t22.CateName}}</a></dt>
+														<dd>{{range .t23}}<em><a href="">{{.CateName}}</a></em>{{end}}</dd>
 													</dl>
 													{{end}}
 												</div>
