@@ -26,11 +26,21 @@ type Address struct {
 
 }
 
+type TpshopCategory struct {
+	Id int
+	CateName string `orm:"default('')"`
+	Pid int `orm:"default(0)"`
+	IsShow int `orm:"default(1)"`
+	CreateTime int `orm:"null"`
+	UpdateTime int `orm:"null"`
+	DeleteTime int `orm:"null"`
+}
+
 func init(){
 	//注册数据库
 	orm.RegisterDataBase("default","mysql","root:123456@tcp(127.0.0.1:3306)/pyg")
 	//注册表结构
-	orm.RegisterModel(new(User),new(Address))
+	orm.RegisterModel(new(User),new(Address),new(TpshopCategory))
 	//跑起来
 	orm.RunSyncdb("default",false,true)
 }

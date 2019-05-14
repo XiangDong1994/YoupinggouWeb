@@ -339,6 +339,24 @@ func(this*UserController)Logout(){
 
 //展示用户中心页
 func(this*UserController)ShowUserCenterInfo(){
+
+	//查询用户名、电话号和默认地址
+	o := orm.NewOrm()
+	var user models.User
+	//给查询对象赋值
+	name := this.GetSession("name")
+	user.Name = name.(string)
+	o.Read(&user,"Name")
+	this.Data["user"] = user
+
+	//传地址
+	var addr models.Address
+	qs := o.QueryTable("Address").RelatedSel("User").Filter("User__Name",user.Name)
+	qs.Filter("IsDefault",true).One(&addr)
+	this.Data["addr"] = addr
+
+	this.Data["tplName"] = "个人信息"
+	this.Layout = "userLayout.html"
 	this.TplName = "user_center_info.html"
 }
 
@@ -352,7 +370,15 @@ func(this*UserController)ShowSite(){
 	qs := o.QueryTable("Address").RelatedSel("User").Filter("User__Name",name.(string))
 	qs.Filter("IsDefault",true).One(&address)
 
+	//手机号加密   atoi    不使用库函数实现itoa函数     两个人对着跑   思路
+	qian := address.Phone[:3]
+	hou := address.Phone[7:]
+
+	address.Phone = qian + "****" + hou
+
+	this.Data["tplName"] = "收货地址"
 	this.Data["address"] = address
+	this.Layout = "userLayout.html"
 	this.TplName = "user_center_site.html"
 }
 
